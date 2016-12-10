@@ -1,0 +1,34 @@
+﻿
+    <div [formGroup]="form" class="row clearfix">
+        <label class="col-sm-4 control-label">{{varscope.label}}</label>
+        <div class="col-sm-6">
+            <input input-standard
+                   type="text"
+                   name="input"
+                   ng-disabled="varscope.isDisabled"
+                   class="form-control"
+                   ng-model="varscope.values[0].value"
+                   ng-pattern="validate"
+                   ng-required="varscope.required"
+                   placeholder="{{varscope.placeholder}}" />
+        </div>
+        <div class="col-sm-1">
+            <span style="font-size:xx-large; vertical-align:bottom; ">
+                <b ng-style="{color: getValidationColor(innerForm.input.$invalid)}">*</b>
+            </span>
+        </div>
+    </div>
+    <div class="row clearfix" ng-show="varscope.errorMessage.length > 0">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-7">
+            <div class="alert alert-danger">
+                <!--style="margin-left:20px; margin-right:20px">-->
+                <i class="fa fa-exclamation-triangle"></i>&nbsp;{{varscope.errorMessage}}
+            </div>
+        </div>
+    </div>
+
+
+
+
+

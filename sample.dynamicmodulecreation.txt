@@ -1,0 +1,41 @@
+import {AfterViewInit, Compiler, Component, NgModule, ViewChild,
+  ViewContainerRef} from '@angular/core'
+import {BrowserModule} from '@angular/platform-browser'
+
+@Component({
+  selector: 'my-app',
+  template: `
+    <h1>Dynamic template:</h1>
+    <div #container></div>
+  `,
+})
+export class App implements AfterViewInit {
+  @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
+  
+  constructor(private compiler: Compiler) {}
+
+  ngAfterViewInit() {
+    this.addComponent('<u>Example template...</u>');
+  }
+  
+  private addComponent(template: string) {
+    @Component({template: template})
+    class TemplateComponent {}
+
+    @NgModule({declarations: [TemplateComponent]})
+    class TemplateModule {}
+
+    const mod = this.compiler.compileModuleAndAllComponentsSync(TemplateModule);
+    const factory = mod.componentFactories.find((comp) =>
+      comp.componentType === TemplateComponent
+    );
+    const component = this.container.createComponent(factory);
+  }
+}
+
+@NgModule({
+  imports: [ BrowserModule ],
+  declarations: [ App ],
+  bootstrap: [ App ]
+})
+export class AppModule {}
