@@ -1,16 +1,16 @@
 ﻿
-    <div [formGroup]="form" class="row clearfix">
-        <label class="col-sm-4 control-label">{{varscope.label}}</label>
+    <div class="row clearfix">
+        <label class="col-sm-4 control-label">{{data.label}}</label>
         <div class="col-sm-6">
             <input input-standard
                    type="text"
                    name="input"
-                   ng-disabled="varscope.isDisabled"
+                   [disabled]="data.isDisabled"
                    class="form-control"
-                   ng-model="varscope.values[0].value"
+                   ng-model="data.values[0].value"
                    ng-pattern="validate"
                    ng-required="varscope.required"
-                   placeholder="{{varscope.placeholder}}" />
+                   [placeholder]="data.placeholder" />
         </div>
         <div class="col-sm-1">
             <span style="font-size:xx-large; vertical-align:bottom; ">

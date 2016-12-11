@@ -7,5 +7,5 @@
     templateUrl: 'formText.component.html'
 })
 export class FormTextComponent {
-
+    data:any;
 }
